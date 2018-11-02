@@ -1,21 +1,25 @@
 package com.qa.persistence.repository;
 
-import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.enterprise.inject.Alternative;
+
+import com.qa.persistence.domain.Classroom;
+import com.qa.util.JSONTools;
 
 @Alternative
 public class LocalAccount implements Accountable{
 	
-	private Map classrooms = new HashMap<int, Classroom>();
+	private HashMap<Integer, Classroom> classrooms = new HashMap<Integer, Classroom>();
 
-	public String getAllInRoom(int classRoom) {
-		// TODO Auto-generated method stub
-		return null;
+	public String getAllInRoom(int classroomID) {
+		Classroom thisRoom = classrooms.get(classroomID);
+		return JSONTools.JSONroom(thisRoom);
 	}
 
 	public String getAllInAllRooms() {
-		// TODO Auto-generated method stub
+		//List<Classroom> allRooms = classrooms.values().
 		return null;
 	}
 
