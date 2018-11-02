@@ -6,23 +6,29 @@ import java.util.List;
 import javax.enterprise.inject.Alternative;
 
 import com.qa.persistence.domain.Classroom;
+
 import com.qa.persistence.domain.Trainee;
 import com.qa.persistence.domain.Trainer;
+
+import com.qa.util.JSONTools;
+
 
 @Alternative
 public class LocalAccount implements Accountable{
 	
 	private HashMap<Integer, Classroom> classrooms = new HashMap<Integer, Classroom>();
+
 	private HashMap<Integer, Trainer> trainers = new HashMap<Integer, Trainer>();
 	private HashMap<Integer, Trainee> students = new HashMap<Integer, Trainee>();
 
-	public String getAllInRoom(int classRoom) {
-		// TODO Auto-generated method stub
-		return null;
+
+	public String getAllInRoom(int classroomID) {
+		Classroom thisRoom = classrooms.get(classroomID);
+		return JSONTools.JSONroom(thisRoom);
 	}
 
 	public String getAllInAllRooms() {
-		// TODO Auto-generated method stub
+		//List<Classroom> allRooms = classrooms.values().
 		return null;
 	}
 
