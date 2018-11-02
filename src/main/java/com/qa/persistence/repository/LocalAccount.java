@@ -7,78 +7,87 @@ import javax.enterprise.inject.Alternative;
 
 import com.qa.persistence.domain.Classroom;
 
-import com.qa.persistence.domain.Trainee;
+import com.qa.persistence.domain.Student;
 import com.qa.persistence.domain.Trainer;
 
 import com.qa.util.JSONTools;
 
-
 @Alternative
-public class LocalAccount implements Accountable{
-	
+public class LocalAccount implements Accountable {
+
 	private HashMap<Integer, Classroom> classrooms = new HashMap<Integer, Classroom>();
 
 	private HashMap<Integer, Trainer> trainers = new HashMap<Integer, Trainer>();
-	private HashMap<Integer, Trainee> students = new HashMap<Integer, Trainee>();
+	private HashMap<Integer, Student> students = new HashMap<Integer, Student>();
 
+	private static int trainerKey = 1;
+	private static int studentKey = 1;
+	private static int roomKey = 1;
 
 	public String getAllInRoom(int classroomID) {
 		Classroom thisRoom = classrooms.get(classroomID);
-		return JSONTools.JSONroom(thisRoom);
+		return JSONTools.JSONfromObject(thisRoom);
 	}
 
 	public String getAllInAllRooms() {
-		//List<Classroom> allRooms = classrooms.values().
-		return null;
+		return JSONTools.JSONfromObject(classrooms);
 	}
 
 	public String getTrainerByClassroom(int classRoom) {
-		return classrooms.get(classRoom).getRoomLead();
+		return JSONTools.JSONfromObject(classrooms.get(classRoom).getRoomLead());
 	}
 
 	public String getAllTrainersByClassroom(int classRoom) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Trainer> trainers = classrooms.get(classRoom).getAssistants();
+		trainers.add(classrooms.get(classRoom).getRoomLead());
+		return JSONTools.JSONfromObject(trainers);
 	}
 
 	public String getAllTrainers() {
-		// TODO Auto-generated method stub
-		return null;
+		return JSONTools.JSONfromObject(trainers.values());
 	}
 
 	public String getTrainerByID(int idNumber) {
-		// TODO Auto-generated method stub
-		return null;
+		return JSONTools.JSONfromObject(trainers.get(idNumber));
 	}
 
 	public String getStudents() {
-		// TODO Auto-generated method stub
-		return null;
+		return JSONTools.JSONfromObject(students.values());
 	}
 
 	public String getStudentsByClassroom(int classRoom) {
-		// TODO Auto-generated method stub
-		return null;
+		return JSONTools.JSONfromObject(classrooms.get(classRoom).getStudents());
 	}
 
 	public String getStudentByID(int idNumber) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public boolean addStudent(String student) {
-		// TODO Auto-generated method stub
-		return false;
+		return JSONTools.JSONfromObject(students.get(idNumber));
 	}
 
 	public boolean addTrainer(String trainer) {
-		// TODO Auto-generated method stub
-		return false;
+		Trainer trainerObject = JSONTools.ObjectFromJSON(trainer, Trainer.class);
+		trainerObject.setID(trainerKey);
+		trainers.put(trainerKey, trainerObject);
+		trainerKey++;
+		return true;
 	}
 
 	public boolean addClassroom(String classroom) {
-		// TODO Auto-generated method stub
-		return false;
+		Classroom classRoomObject = JSONTools.ObjectFromJSON(classroom, Classroom.class);
+		classRoomObject.setID(trainerKey);
+		classrooms.put(roomKey, classRoomObject);
+		roomKey++;
+		return true;
+
+	}
+
+	@Override
+	public boolean addStudent(String student) {
+		Student traineeObject = JSONTools.ObjectFromJSON(student, Student.class);
+		traineeObject.setID(studentKey);
+		students.put(studentKey, traineeObject);
+		studentKey++;
+		return true;
+
 	}
 
 	@Override
@@ -88,20 +97,48 @@ public class LocalAccount implements Accountable{
 
 	@Override
 	public List<Trainer> AssistantsByID(int classID) {
-		// TODO Auto-generated method stub
-		return null;
+		return classrooms.get(classID).getAssistants();
 	}
 
 	@Override
-	public Trainee StudentByID(int idNumber) {
-		// TODO Auto-generated method stub
-		return null;
+	public Student StudentByID(int idNumber) {
+		return students.get(idNumber);
 	}
 
 	@Override
 	public Trainer TrainerByID(int idNumber) {
-		// TODO Auto-generated method stub
-		return null;
+		return trainers.get(idNumber);
 	}
+
+	@Override
+	public boolean removeStudent(int idNumber) {
+		if (students.get(idNumber) != null) {
+			students.remove(idNumber);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean removeTrainer(int idNumber) {
+		if (trainers.get(idNumber) != null) {
+			trainers.remove(idNumber);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean removeClassroom(int idNumber) {
+		if (classrooms.get(idNumber) != null) {
+			classrooms.remove(idNumber);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 
 }

@@ -1,14 +1,20 @@
 package com.qa.persistence.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 //@Entity
-public class Trainee {
-	public Trainee(String name) {
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+public class Student extends Person{
+		
+	public Student(String name) {
 		this.setName(name);
 	}
 
-	public Trainee(String name, int classRoomid) {
+	public Student(String name, int classRoomid) {
 		this(name);
 		this.setClassRoomid(classRoomid);
 
@@ -45,24 +51,18 @@ public class Trainee {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public void setID(int id) {
+		this.id = id;
+	}
 
-	private String name;
-	private int technicalSkills;
-	private int softSkills;
-	@Id
-	@GeneratedValue()
-=======
-	
-	public Trainee(String name) {
-		this.name = name;
-		
-}
-	
-	private String name;
-	private int technicalSkills;
-	private int softSkills;
+
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	@ManyToOne(optional=false, fetch = FetchType.EAGER, targetEntity = Classroom.class) 
 	private int classRoomid;
+	private String name;
+	private int technicalSkills;
+	private int softSkills;
 
 }

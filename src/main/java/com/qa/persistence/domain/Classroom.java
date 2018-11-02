@@ -2,27 +2,31 @@ package com.qa.persistence.domain;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@Entity
 public class Classroom {
 
-	public Classroom(Trainer roomLead, List<Trainee> students) {
+	public Classroom(Trainer roomLead, List<Student> students) {
 		this.roomLead = roomLead;
 		this.students = students;
 	}
 
-	public Classroom(Trainer roomLead, List<Trainer> teachingAssistants, List<Trainee> students) {
+	public Classroom(Trainer roomLead, List<Trainer> teachingAssistants, List<Student> students) {
 		this(roomLead, students);
 		this.teachingAssistants = teachingAssistants;
 	}
 
-	public void addTrainee(Trainee trainee) {
-		this.students.add(trainee);
+	public void addStudent(Student student) {
+		this.students.add(student);
 	}
 
-	public boolean removeTrainee(Trainee trainee) {
-		return this.students.remove(trainee);
+	public boolean removeStudent(Student student) {
+		return this.students.remove(student);
 	}
 
 	public void addAssistant(Trainer assistant) {
@@ -42,7 +46,7 @@ public class Classroom {
 		return this.roomLead;
 	}
 
-	public List<Trainee> getStudents() {
+	public List<Student> getStudents() {
 		return this.students;
 	}
 
@@ -51,11 +55,14 @@ public class Classroom {
 	}
 
 	@Id
-	@GeneratedValue()
-	private int id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int roomNumber;
 	private Trainer roomLead;
-	private List<Trainee> students;
+	private List<Student> students;
 	private List<Trainer> teachingAssistants;
 
+	public void setID(int roomKey) {
+		this.roomNumber = roomKey;
+	}
 
 }

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.qa.persistence.domain.Classroom;
 import com.qa.persistence.domain.Trainer;
-import com.qa.persistence.domain.Trainee;
+import com.qa.persistence.domain.Student;
 
 public interface Accountable {
 
@@ -32,11 +32,17 @@ public interface Accountable {
 
 	public boolean addClassroom(String classroom);
 
+	public boolean removeStudent(int idNumber);
+
+	public boolean removeTrainer(int idNumber);
+
+	public boolean removeClassroom(int idNumber);
+
 	public Classroom ClassroomByID(int classID);
 
 	public List<Trainer> AssistantsByID(int classID);
 
-	public Trainee StudentByID(int idNumber);
+	public Student StudentByID(int idNumber);
 
 	public Trainer TrainerByID(int idNumber);
 
