@@ -4,5 +4,5 @@
       http://xmlns.jcp.org/xml/ns/javaee
       http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd"
 	bean-discovery-mode="all">
-	<!-- <alternatives> <class>com.qa.persistence.repository.LocalAccount</class> </alternatives> --> <!-- Remove the comment tags to make work locally only -->
+	<!-- <alternatives> // <class>com.qa.persistence.repository.LocalAccount</class> </alternatives> --> <!-- Remove the comment tags to make work locally only -->
 </beans>

@@ -19,7 +19,7 @@ public class Trainer extends Person{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
-	@ManyToOne(optional=true, fetch = FetchType.LAZY, targetEntity = Classroom.class) 
+	@ManyToOne(optional=true, fetch = FetchType.EAGER, targetEntity = Classroom.class) 
 	private int classRoomid;
 
 	public void setID(int trainerKey) {

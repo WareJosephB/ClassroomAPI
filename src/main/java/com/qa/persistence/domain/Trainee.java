@@ -59,7 +59,7 @@ public class Trainee extends Person{
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@ManyToOne(optional=false, fetch = FetchType.LAZY, targetEntity = Classroom.class) 
+	@ManyToOne(optional=false, fetch = FetchType.EAGER, targetEntity = Classroom.class) 
 	private int classRoomid;
 	private String name;
 	private int technicalSkills;
