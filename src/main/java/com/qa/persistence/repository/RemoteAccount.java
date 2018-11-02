@@ -33,7 +33,7 @@ public class RemoteAccount implements Accountable {
 		List<Person> allPeople = new ArrayList<Person>();
 		allPeople.addAll(entityManager.createQuery("SELECT a FROM Trainer a").getResultList());
 		allPeople.addAll(entityManager.createQuery("SELECT a FROM Trainee a").getResultList());
-		return null;
+		return JSONTools.JSONfromObject(allPeople);
 	}
 
 	public String getTrainerByClassroom(int classRoom) {
@@ -56,7 +56,7 @@ public class RemoteAccount implements Accountable {
 	}
 
 	public String getStudents() {
-		Query query = entityManager.createQuery("SELECT a FROM Trainee a");
+		Query query = entityManager.createQuery("SELECT a FROM Student a");
 		return JSONTools.JSONfromObject(query.getResultList());
 	}
 
@@ -71,8 +71,8 @@ public class RemoteAccount implements Accountable {
 	}
 	@Transactional(REQUIRED)
 	public boolean addStudent(String student) {
-		Student traineeObject = JSONTools.ObjectFromJSON(student, Student.class);
-		entityManager.persist(traineeObject);
+		Student studentObject = JSONTools.ObjectFromJSON(student, Student.class);
+		entityManager.persist(studentObject);
 		return true;
 	}
 	@Transactional(REQUIRED)
@@ -91,23 +91,23 @@ public class RemoteAccount implements Accountable {
 
 	public Classroom ClassroomByID(int classID) {
 		return (Classroom) entityManager
-				.createQuery("SELECT i FROM trainer i WHERE i.roomNumber =" + Integer.toString(classID))
+				.createQuery("SELECT i FROM Classroom i WHERE i.roomNumber =" + Integer.toString(classID))
 				.getSingleResult();
 	}
 
 	public List<Trainer> AssistantsByID(int classID) {
-		return entityManager.createQuery("SELECT i FROM trainer i WHERE i.roomNumber =" + Integer.toString(classID))
+		return entityManager.createQuery("SELECT i FROM Trainer i WHERE i.roomNumber =" + Integer.toString(classID))
 				.getResultList();
 	}
 
 	@Override
 	public Student StudentByID(int idNumber) {
-		return (Student) entityManager.createQuery("SELECT i FROM trainee i WHERE i.id =" + Integer.toString(idNumber))
+		return (Student) entityManager.createQuery("SELECT i FROM Student i WHERE i.id =" + Integer.toString(idNumber))
 				.getSingleResult();
 	}
 
 	public Trainer TrainerByID(int idNumber) {
-		return (Trainer) entityManager.createQuery("SELECT i FROM trainer i WHERE i.id =" + Integer.toString(idNumber))
+		return (Trainer) entityManager.createQuery("SELECT i FROM Trainer i WHERE i.id =" + Integer.toString(idNumber))
 				.getSingleResult();
 	}
 
