@@ -10,7 +10,7 @@ import com.qa.persistence.domain.Trainer;
 
 @Default
 public class RemoteAccount implements Accountable {
-	
+
 	public String getAllInRoom(int classRoom) {
 		return com.qa.util.JSONTools.JSONfromObject(ClassroomByID(classRoom));
 	}
@@ -92,6 +92,30 @@ public class RemoteAccount implements Accountable {
 	public Trainer TrainerByID(int idNumber) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+
+	@Override
+	public boolean removeStudent(int idNumber) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+
+	@Override
+	public boolean removeTrainer(int idNumber) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+
+	@Override
+	public boolean removeClassroom(int idNumber) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

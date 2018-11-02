@@ -57,5 +57,8 @@ public class Classroom {
 	private List<Trainee> students;
 	private List<Trainer> teachingAssistants;
 
+	public void setID(int roomKey) {
+		this.id = roomKey;
+	}
 
 }

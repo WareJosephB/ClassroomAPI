@@ -63,23 +63,30 @@ public class LocalAccount implements Accountable {
 		return JSONTools.JSONfromObject(students.get(idNumber));
 	}
 
-	public void addStudent(Trainee student) {
-		students.put(studentKey, student);
-		studentKey += 1;
+	public boolean addTrainer(String trainer) {
+		Trainer trainerObject = JSONTools.ObjectFromJSON(trainer, Trainer.class);
+		trainerObject.setID(trainerKey);
+		trainers.put(trainerKey, trainerObject);
+		trainerKey++;
+		return true;
 	}
 
-	public void addTrainer(String trainer) {
-		trainers.put(trainerKey, JSONTools.ObjectFromJSON(trainer, Trainer.class));
-	}
+	public boolean addClassroom(String classroom) {
+		Classroom classRoomObject = JSONTools.ObjectFromJSON(classroom, Classroom.class);
+		classRoomObject.setID(trainerKey);
+		classrooms.put(roomKey, classRoomObject);
+		roomKey++;
+		return true;
 
-	public void addClassroom(String classroom) {
-		classrooms.put(roomKey, JSONTools.ObjectFromJSON(classroom, Classroom.class));
 	}
 
 	@Override
-	public void addStudent(String student) {
-		students.put(studentKey, JSONTools.ObjectFromJSON(student, Trainee.class));
+	public boolean addStudent(String student) {
+		Trainee traineeObject = JSONTools.ObjectFromJSON(student, Trainee.class);
+		traineeObject.setID(studentKey);
+		students.put(studentKey, traineeObject);
 		studentKey++;
+		return true;
 
 	}
 
@@ -104,31 +111,9 @@ public class LocalAccount implements Accountable {
 	}
 
 	@Override
-	public boolean removeStudent(String student) {
-		Trainee studentObject = JSONTools.ObjectFromJSON(student, Trainee.class);
-		if (students.values().contains(studentObject)) {
-			students.values().remove(studentObject);
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	@Override
 	public boolean removeStudent(int idNumber) {
 		if (students.get(idNumber) != null) {
 			students.remove(idNumber);
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	@Override
-	public boolean removeTrainer(String trainer) {
-		Trainer trainerObject = JSONTools.ObjectFromJSON(trainer, Trainer.class);
-		if (trainers.values().contains(trainerObject)) {
-			trainers.values().remove(trainerObject);
 			return true;
 		} else {
 			return false;
@@ -146,17 +131,6 @@ public class LocalAccount implements Accountable {
 	}
 
 	@Override
-	public boolean removeClassroom(String classRoom) {
-		Classroom classroomObject = JSONTools.ObjectFromJSON(classRoom, Classroom.class);
-		if (classrooms.values().contains(classroomObject)) {
-			classrooms.values().remove(classroomObject);
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	@Override
 	public boolean removeClassroom(int idNumber) {
 		if (classrooms.get(idNumber) != null) {
 			classrooms.remove(idNumber);
@@ -165,5 +139,6 @@ public class LocalAccount implements Accountable {
 			return false;
 		}
 	}
+
 
 }

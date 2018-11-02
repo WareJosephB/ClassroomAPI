@@ -48,6 +48,10 @@ public class Trainee {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public void setID(int id) {
+		this.id = id;
+	}
 
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)

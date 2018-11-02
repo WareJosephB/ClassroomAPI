@@ -26,21 +26,15 @@ public interface Accountable {
 
 	public String getStudentByID(int idNumber);
 
-	public void addStudent(String student);
+	public boolean addStudent(String student);
 
-	public void addTrainer(String trainer);
+	public boolean addTrainer(String trainer);
 
-	public void addClassroom(String classroom);
-
-	public boolean removeStudent(String student);
+	public boolean addClassroom(String classroom);
 
 	public boolean removeStudent(int idNumber);
 
-	public boolean removeTrainer(String trainer);
-
 	public boolean removeTrainer(int idNumber);
-
-	public boolean removeClassroom(String classRoom);
 
 	public boolean removeClassroom(int idNumber);
 
