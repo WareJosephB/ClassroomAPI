@@ -7,18 +7,23 @@ import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
+import static javax.transaction.Transactional.TxType.REQUIRED;
+import static javax.transaction.Transactional.TxType.SUPPORTS;
 
 import com.qa.persistence.domain.Classroom;
 import com.qa.persistence.domain.Person;
-import com.qa.persistence.domain.Trainee;
+import com.qa.persistence.domain.Student;
 import com.qa.persistence.domain.Trainer;
 import com.qa.util.JSONTools;
 
 @Default
+@Transactional(SUPPORTS)
 public class RemoteAccount implements Accountable {
 
 	@PersistenceContext(unitName = "primary")
 	private static EntityManager entityManager;
+	
 
 	public String getAllInRoom(int classRoom) {
 		return com.qa.util.JSONTools.JSONfromObject(ClassroomByID(classRoom));
@@ -64,54 +69,51 @@ public class RemoteAccount implements Accountable {
 	public String getStudentByID(int idNumber) {
 		return JSONTools.JSONfromObject(StudentByID(idNumber));
 	}
-
+	@Transactional(REQUIRED)
 	public boolean addStudent(String student) {
-		Trainee traineeObject = JSONTools.ObjectFromJSON(student, Trainee.class);
+		Student traineeObject = JSONTools.ObjectFromJSON(student, Student.class);
 		entityManager.persist(traineeObject);
 		return true;
 	}
-
+	@Transactional(REQUIRED)
 	public boolean addTrainer(String trainer) {
 		Trainer trainerObject = JSONTools.ObjectFromJSON(trainer, Trainer.class);
 		entityManager.persist(trainerObject);
 		return true;
 
 	}
-
+	@Transactional(REQUIRED)
 	public boolean addClassroom(String classroom) {
 		Classroom classroomObject = JSONTools.ObjectFromJSON(classroom, Classroom.class);
 		entityManager.persist(classroomObject);
 		return true;
 	}
 
-	@Override
 	public Classroom ClassroomByID(int classID) {
 		return (Classroom) entityManager
 				.createQuery("SELECT i FROM trainer i WHERE i.roomNumber =" + Integer.toString(classID))
 				.getSingleResult();
 	}
 
-	@Override
 	public List<Trainer> AssistantsByID(int classID) {
 		return entityManager.createQuery("SELECT i FROM trainer i WHERE i.roomNumber =" + Integer.toString(classID))
 				.getResultList();
 	}
 
 	@Override
-	public Trainee StudentByID(int idNumber) {
-		return (Trainee) entityManager.createQuery("SELECT i FROM trainee i WHERE i.id =" + Integer.toString(idNumber))
+	public Student StudentByID(int idNumber) {
+		return (Student) entityManager.createQuery("SELECT i FROM trainee i WHERE i.id =" + Integer.toString(idNumber))
 				.getSingleResult();
 	}
 
-	@Override
 	public Trainer TrainerByID(int idNumber) {
 		return (Trainer) entityManager.createQuery("SELECT i FROM trainer i WHERE i.id =" + Integer.toString(idNumber))
 				.getSingleResult();
 	}
 
-	@Override
+	@Transactional(REQUIRED)
 	public boolean removeStudent(int idNumber) {
-		Trainee student = entityManager.find(Trainee.class, idNumber);
+		Student student = entityManager.find(Student.class, idNumber);
 		if (student != null) {
 			entityManager.remove(student);
 			return true;
@@ -120,7 +122,7 @@ public class RemoteAccount implements Accountable {
 		}
 	}
 
-	@Override
+	@Transactional(REQUIRED)
 	public boolean removeTrainer(int idNumber) {
 		Trainer trainer = entityManager.find(Trainer.class, idNumber);
 		if (trainer != null) {
@@ -131,7 +133,7 @@ public class RemoteAccount implements Accountable {
 		}
 	}
 
-	@Override
+	@Transactional(REQUIRED)
 	public boolean removeClassroom(int idNumber) {
 		Classroom classroom = entityManager.find(Classroom.class, idNumber);
 		if (classroom != null) {

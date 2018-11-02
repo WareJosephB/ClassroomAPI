@@ -1,6 +1,7 @@
 package com.qa.interoperability;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -10,8 +11,8 @@ import javax.ws.rs.Produces;
 
 import com.qa.persistence.repository.Accountable;
 
-@Path("/Trainee")
-public class TraineeEndpoint {
+@Path("/Student")
+public class StudentEndpoint {
 	
 	@Inject
 	private Accountable service;
@@ -20,7 +21,7 @@ public class TraineeEndpoint {
 	@Path("/create/")
 	@POST
 	@Produces({ "application/json" })
-	public String addTrainee(String student) {
+	public String addStudent(String student) {
 		if (service.addStudent(student)) {
 			return "Student addedd succesfully";
 		} else {

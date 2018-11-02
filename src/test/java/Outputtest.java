@@ -15,23 +15,23 @@
 //	@Test
 //	public void test() {
 //		Trainer John = new Trainer("John Gordon");
-//		Trainee Joe = new Trainee("Joe Bloggs");
-//		Trainee Jane = new Trainee("Jane Bloggs");
+//		Trainee Joe = new Student("Joe Bloggs");
+//		Trainee Jane = new Student("Jane Bloggs");
 //		
 //		Trainer Matt = new Trainer("Matt Hunt");
-//		Trainee David = new Trainee("David Bloggs");
-//		Trainee Ceri = new Trainee("Ceri Bloggs");
+//		Trainee David = new Student("David Bloggs");
+//		Trainee Ceri = new Student("Ceri Bloggs");
 //		
-//		List<Trainee> room2Trainees = new ArrayList<Trainee>();
-//		room2Trainees.add(David);
-//		room2Trainees.add(Ceri);
+//		List<Trainee> room2Students = new ArrayList<Trainee>();
+//		room2Students.add(David);
+//		room2Students.add(Ceri);
 //		
-//		List<Trainee> Trainees = new ArrayList<Trainee>();
-//		Trainees.add(Joe);
-//		Trainees.add(Jane);
+//		List<Trainee> Students = new ArrayList<Trainee>();
+//		Students.add(Joe);
+//		Students.add(Jane);
 //		
-//		Classroom thisRoom = new Classroom(John, Trainees);
-//		Classroom thatRoom = new Classroom(Matt, room2Trainees);
+//		Classroom thisRoom = new Classroom(John, Students);
+//		Classroom thatRoom = new Classroom(Matt, room2Students);
 //		
 //		List<Classroom> School = new ArrayList<Classroom>();
 //		School.add(thisRoom);

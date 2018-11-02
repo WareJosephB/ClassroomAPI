@@ -7,7 +7,7 @@ import javax.enterprise.inject.Alternative;
 
 import com.qa.persistence.domain.Classroom;
 
-import com.qa.persistence.domain.Trainee;
+import com.qa.persistence.domain.Student;
 import com.qa.persistence.domain.Trainer;
 
 import com.qa.util.JSONTools;
@@ -18,7 +18,7 @@ public class LocalAccount implements Accountable {
 	private HashMap<Integer, Classroom> classrooms = new HashMap<Integer, Classroom>();
 
 	private HashMap<Integer, Trainer> trainers = new HashMap<Integer, Trainer>();
-	private HashMap<Integer, Trainee> students = new HashMap<Integer, Trainee>();
+	private HashMap<Integer, Student> students = new HashMap<Integer, Student>();
 
 	private static int trainerKey = 1;
 	private static int studentKey = 1;
@@ -82,7 +82,7 @@ public class LocalAccount implements Accountable {
 
 	@Override
 	public boolean addStudent(String student) {
-		Trainee traineeObject = JSONTools.ObjectFromJSON(student, Trainee.class);
+		Student traineeObject = JSONTools.ObjectFromJSON(student, Student.class);
 		traineeObject.setID(studentKey);
 		students.put(studentKey, traineeObject);
 		studentKey++;
@@ -101,7 +101,7 @@ public class LocalAccount implements Accountable {
 	}
 
 	@Override
-	public Trainee StudentByID(int idNumber) {
+	public Student StudentByID(int idNumber) {
 		return students.get(idNumber);
 	}
 

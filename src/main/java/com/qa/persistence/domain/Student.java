@@ -8,13 +8,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-public class Trainee extends Person{
+public class Student extends Person{
 		
-	public Trainee(String name) {
+	public Student(String name) {
 		this.setName(name);
 	}
 
-	public Trainee(String name, int classRoomid) {
+	public Student(String name, int classRoomid) {
 		this(name);
 		this.setClassRoomid(classRoomid);
 
