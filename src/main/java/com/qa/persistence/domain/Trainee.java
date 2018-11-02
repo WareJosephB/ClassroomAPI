@@ -2,8 +2,11 @@ package com.qa.persistence.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 //@Entity
+import javax.persistence.Id;
 public class Trainee {
+		
 	public Trainee(String name) {
 		this.setName(name);
 	}
@@ -46,23 +49,12 @@ public class Trainee {
 		this.name = name;
 	}
 
-	private String name;
-	private int technicalSkills;
-	private int softSkills;
-	@Id
-	@GeneratedValue()
-=======
-	
-	public Trainee(String name) {
-		this.name = name;
-		
-}
-	
-	private String name;
-	private int technicalSkills;
-	private int softSkills;
+
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private int classRoomid;
+	private String name;
+	private int technicalSkills;
+	private int softSkills;
 
 }
