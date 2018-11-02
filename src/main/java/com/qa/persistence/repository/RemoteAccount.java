@@ -50,4 +50,19 @@ public class RemoteAccount implements Accountable {
 		return null;
 	}
 
+	public boolean addStudent(String student) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean addTrainer(String trainer) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean addClassroom(String classroom) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

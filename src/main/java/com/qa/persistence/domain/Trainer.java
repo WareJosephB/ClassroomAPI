@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 public class Trainer {
 
 	private String name;
+	private int id;
+	private int classRoomid;
 
 	
 }

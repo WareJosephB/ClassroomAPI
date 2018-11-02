@@ -1,4 +1,4 @@
-package com.qa.persistence.repository;
+package com.qa.interoperability;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

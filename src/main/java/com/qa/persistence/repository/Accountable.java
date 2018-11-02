@@ -2,13 +2,13 @@ package com.qa.persistence.repository;
 
 public interface Accountable {
 	
-	public String getAllInRoom(int classRoom);
+	public String getAllInRoom(int classroom);
 	
 	public String getAllInAllRooms();
 	
-	public String getTrainerByClassroom(int classRoom);
+	public String getTrainerByClassroom(int classroom);
 	
-	public String getAllTrainersByClassroom(int classRoom);
+	public String getAllTrainersByClassroom(int classroom);
 	
 	public String getAllTrainers();
 	
@@ -16,8 +16,14 @@ public interface Accountable {
 	
 	public String getStudents();
 	
-	public String getStudentsByClassroom(int classRoom);
+	public String getStudentsByClassroom(int classroom);
 	
 	public String getStudentByID(int idNumber);
+	
+	public boolean addStudent(String student);
+	
+	public boolean addTrainer(String trainer);
+	
+	public boolean addClassroom(String classroom);
 
 }
