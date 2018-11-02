@@ -1,13 +1,20 @@
 package com.qa.persistence.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 public class Trainer {
 
-	private String name;
+	public Trainer(String name) {
+		this.name = name;
+	}
+	
+	@Id @GeneratedValue()
 	private int id;
-	private int classRoomid;
+	private String name;
+	//private int classRoomid;
 
 	
 }

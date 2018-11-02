@@ -1,13 +1,20 @@
 package com.qa.persistence.repository;
 
-import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.enterprise.inject.Alternative;
+
+import com.qa.persistence.domain.Classroom;
+import com.qa.persistence.domain.Trainee;
+import com.qa.persistence.domain.Trainer;
 
 @Alternative
 public class LocalAccount implements Accountable{
 	
-	private Map classrooms = new HashMap<int, Classroom>();
+	private HashMap<Integer, Classroom> classrooms = new HashMap<Integer, Classroom>();
+	private HashMap<Integer, Trainer> trainers = new HashMap<Integer, Trainer>();
+	private HashMap<Integer, Trainee> students = new HashMap<Integer, Trainee>();
 
 	public String getAllInRoom(int classRoom) {
 		// TODO Auto-generated method stub
@@ -20,8 +27,7 @@ public class LocalAccount implements Accountable{
 	}
 
 	public String getTrainerByClassroom(int classRoom) {
-		// TODO Auto-generated method stub
-		return null;
+		return classrooms.get(classRoom).getRoomLead();
 	}
 
 	public String getAllTrainersByClassroom(int classRoom) {
@@ -67,6 +73,29 @@ public class LocalAccount implements Accountable{
 	public boolean addClassroom(String classroom) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public Classroom ClassroomByID(int classID) {
+		return classrooms.get(classID);
+	}
+
+	@Override
+	public List<Trainer> AssistantsByID(int classID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Trainee StudentByID(int idNumber) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Trainer TrainerByID(int idNumber) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

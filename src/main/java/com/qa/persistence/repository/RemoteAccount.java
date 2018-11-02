@@ -1,13 +1,18 @@
 package com.qa.persistence.repository;
 
+import java.util.List;
+
 import javax.enterprise.inject.Default;
+
+import com.qa.persistence.domain.Classroom;
+import com.qa.persistence.domain.Trainee;
+import com.qa.persistence.domain.Trainer;
 
 @Default
 public class RemoteAccount implements Accountable {
-
+	
 	public String getAllInRoom(int classRoom) {
-		// TODO Auto-generated method stub
-		return null;
+		return com.qa.util.JSONTools.JSONfromObject(ClassroomByID(classRoom));
 	}
 
 	public String getAllInAllRooms() {
@@ -16,13 +21,13 @@ public class RemoteAccount implements Accountable {
 	}
 
 	public String getTrainerByClassroom(int classRoom) {
-		// TODO Auto-generated method stub
-		return null;
+		return com.qa.util.JSONTools.JSONfromObject(ClassroomByID(classRoom).getRoomLead());
 	}
 
 	public String getAllTrainersByClassroom(int classRoom) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Trainer> inRoom = ClassroomByID(classRoom).getAssistants();
+		inRoom.add(ClassroomByID(classRoom).getRoomLead());
+		return com.qa.util.JSONTools.JSONfromObject(inRoom);
 	}
 
 	public String getAllTrainers() {
@@ -63,6 +68,30 @@ public class RemoteAccount implements Accountable {
 	public boolean addClassroom(String classroom) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public Classroom ClassroomByID(int classID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Trainer> AssistantsByID(int classID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Trainee StudentByID(int idNumber) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Trainer TrainerByID(int idNumber) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
