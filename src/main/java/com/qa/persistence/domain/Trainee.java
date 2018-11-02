@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-public class Trainee {
+public class Trainee extends Person{
 		
 	public Trainee(String name) {
 		this.setName(name);
@@ -59,8 +59,7 @@ public class Trainee {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@ManyToOne(optional=false, fetch = FetchType.LAZY) 
-    @JoinColumn(name="fk_roomNumber", nullable=false)
+	@ManyToOne(optional=false, fetch = FetchType.LAZY, targetEntity = Classroom.class) 
 	private int classRoomid;
 	private String name;
 	private int technicalSkills;

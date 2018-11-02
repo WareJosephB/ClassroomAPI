@@ -3,10 +3,12 @@ package com.qa.persistence.domain;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@Entity
 public class Classroom {
 
 	public Classroom(Trainer roomLead, List<Trainee> students) {
@@ -54,7 +56,6 @@ public class Classroom {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="roomNumber")
 	private int roomNumber;
 	private Trainer roomLead;
 	private List<Trainee> students;

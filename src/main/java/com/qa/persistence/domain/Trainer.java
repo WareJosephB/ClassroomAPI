@@ -9,7 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Trainer {
+public class Trainer extends Person{
 
 	public Trainer(String name) {
 		this.setName(name);
@@ -19,8 +19,7 @@ public class Trainer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
-	@ManyToOne(optional=true, fetch = FetchType.LAZY) 
-    @JoinColumn(name="fk_roomNumber", nullable=false)
+	@ManyToOne(optional=true, fetch = FetchType.LAZY, targetEntity = Classroom.class) 
 	private int classRoomid;
 
 	public void setID(int trainerKey) {
