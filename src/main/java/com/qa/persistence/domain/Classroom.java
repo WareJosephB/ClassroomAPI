@@ -2,7 +2,9 @@ package com.qa.persistence.domain;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 public class Classroom {
@@ -51,14 +53,15 @@ public class Classroom {
 	}
 
 	@Id
-	@GeneratedValue()
-	private int id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="roomNumber")
+	private int roomNumber;
 	private Trainer roomLead;
 	private List<Trainee> students;
 	private List<Trainer> teachingAssistants;
 
 	public void setID(int roomKey) {
-		this.id = roomKey;
+		this.roomNumber = roomKey;
 	}
 
 }

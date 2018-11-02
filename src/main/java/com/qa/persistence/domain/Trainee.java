@@ -1,10 +1,13 @@
 package com.qa.persistence.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 //@Entity
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 public class Trainee {
 		
 	public Trainee(String name) {
@@ -56,6 +59,8 @@ public class Trainee {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	@ManyToOne(optional=false, fetch = FetchType.LAZY) 
+    @JoinColumn(name="fk_roomNumber", nullable=false)
 	private int classRoomid;
 	private String name;
 	private int technicalSkills;

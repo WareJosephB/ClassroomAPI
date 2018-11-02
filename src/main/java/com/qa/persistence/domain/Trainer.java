@@ -1,8 +1,12 @@
 package com.qa.persistence.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Trainer {
@@ -12,10 +16,12 @@ public class Trainer {
 	}
 
 	@Id
-	@GeneratedValue()
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
-	// private int classRoomid;
+	@ManyToOne(optional=true, fetch = FetchType.LAZY) 
+    @JoinColumn(name="fk_roomNumber", nullable=false)
+	private int classRoomid;
 
 	public void setID(int trainerKey) {
 		this.id = trainerKey;

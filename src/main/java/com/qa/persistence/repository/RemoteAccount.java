@@ -3,20 +3,27 @@ package com.qa.persistence.repository;
 import java.util.List;
 
 import javax.enterprise.inject.Default;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import com.qa.persistence.domain.Classroom;
 import com.qa.persistence.domain.Trainee;
 import com.qa.persistence.domain.Trainer;
+import com.qa.util.JSONTools;
 
 @Default
 public class RemoteAccount implements Accountable {
+
+	@PersistenceContext(unitName = "primary")
+	private static EntityManager entityManager;
 
 	public String getAllInRoom(int classRoom) {
 		return com.qa.util.JSONTools.JSONfromObject(ClassroomByID(classRoom));
 	}
 
 	public String getAllInAllRooms() {
-		// TODO Auto-generated method stub
+		// TODO
 		return null;
 	}
 
@@ -31,28 +38,26 @@ public class RemoteAccount implements Accountable {
 	}
 
 	public String getAllTrainers() {
-		// TODO Auto-generated method stub
-		return null;
+		Query query = entityManager.createQuery("SELECT a FROM Trainer a");
+		return JSONTools.JSONfromObject(query.getResultList());
 	}
 
 	public String getTrainerByID(int idNumber) {
-		// TODO Auto-generated method stub
-		return null;
+		return JSONTools.JSONfromObject(TrainerByID(idNumber));
 	}
 
 	public String getStudents() {
-		// TODO Auto-generated method stub
-		return null;
+		Query query = entityManager.createQuery("SELECT a FROM Trainee a");
+		return JSONTools.JSONfromObject(query.getResultList());
 	}
 
 	public String getStudentsByClassroom(int classRoom) {
-		// TODO Auto-generated method stub
-		return null;
+		Query query = entityManager.createQuery("SELECT i FROM trainee i WHERE i.roomNumber ="+Integer.toString(classRoom));
+		return JSONTools.JSONfromObject(query.getResultList());
 	}
 
 	public String getStudentByID(int idNumber) {
-		// TODO Auto-generated method stub
-		return null;
+		return JSONTools.JSONfromObject(StudentByID(idNumber));
 	}
 
 	public boolean addStudent(String student) {
@@ -78,23 +83,18 @@ public class RemoteAccount implements Accountable {
 
 	@Override
 	public List<Trainer> AssistantsByID(int classID) {
-		// TODO Auto-generated method stub
-		return null;
+		return entityManager.createQuery("SELECT i FROM trainer i WHERE i.roomNumber ="+Integer.toString(classID)).getResultList();
 	}
 
 	@Override
 	public Trainee StudentByID(int idNumber) {
-		// TODO Auto-generated method stub
-		return null;
+		return (Trainee) entityManager.createQuery("SELECT i FROM trainee i WHERE i.id ="+Integer.toString(idNumber)).getSingleResult();
 	}
 
 	@Override
 	public Trainer TrainerByID(int idNumber) {
-		// TODO Auto-generated method stub
-		return null;
+		return (Trainer) entityManager.createQuery("SELECT i FROM trainer i WHERE i.id ="+Integer.toString(idNumber)).getSingleResult();
 	}
-
-
 
 	@Override
 	public boolean removeStudent(int idNumber) {
@@ -102,15 +102,11 @@ public class RemoteAccount implements Accountable {
 		return false;
 	}
 
-
-
 	@Override
 	public boolean removeTrainer(int idNumber) {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-
 
 	@Override
 	public boolean removeClassroom(int idNumber) {
